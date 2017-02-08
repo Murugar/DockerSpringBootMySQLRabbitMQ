@@ -1,0 +1,27 @@
+version: '2'
+services:
+    rabbitmq:
+        image: rabbitmq
+        ports:
+            - "5672:5672"
+    mysql:
+        image: mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=123456
+    spring-app:
+        build:
+          context: .
+          dockerfile: dockerfile.spring
+        ports:
+          - "8080:8080"
+        volumes:
+          - .:/vol/development
+        depends_on:
+          - rabbitmq
+          - mysql
+      
+volumes:
+  data:  
+  
+      
+           
